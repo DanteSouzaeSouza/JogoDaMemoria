@@ -19,8 +19,8 @@ namespace JogoDaMemoria
         private readonly Random random = new Random();
 
         // Criando variáveis para controle dos cliques
-        private Label primeiraClicada = null;
-        private Label segundaClicada = null;
+        private Label primeiraClicada;
+        private Label segundaClicada;
 
         public FrmJogoMem()
         {
@@ -56,13 +56,11 @@ namespace JogoDaMemoria
 
         private void label_Click(object sender, EventArgs e)
         {
-
             // O timer só começa a rodar depois que dois itens
             // que não combinam forem selecionados então
             // devemos ignorar novos cliques se o timer estiver rodando
-            if (timerJogo.Enabled == true)
+            if (timerJogo.Enabled)
                 return;
-
 
 
             // Adiciona uma variável ligada ao controle Label do form
@@ -111,7 +109,6 @@ namespace JogoDaMemoria
             // o timer é então iniciado e em 3/4 de um segundo
             // esconderá os ícones
             timerJogo.Start();
-
         }
 
         private void timerJogo_Tick(object sender, EventArgs e)
@@ -139,11 +136,9 @@ namespace JogoDaMemoria
                 var iconLabel = control as Label;
 
                 if (iconLabel != null)
-                {
                     // checa se a cor do fundo do ícone bate com a cor do próprio ícone
                     if (iconLabel.ForeColor == iconLabel.BackColor)
                         return;
-                }
             }
 
             // Se o foreach não der return, não achou ícones iguais de cores diferentes
@@ -151,6 +146,5 @@ namespace JogoDaMemoria
             MessageBox.Show("Você conseguiu combinar todos os ícones!", "Parabéns!");
             Close();
         }
-
     }
 }
